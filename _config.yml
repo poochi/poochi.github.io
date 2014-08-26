@@ -7,8 +7,9 @@ permalink:        pretty
 
 # Setup
 title:            Beginner's Luck
-tagline:          'Personal Website'
-description:      ''
+tagline:          'Hope it helps'
+description:      'The idea behind a website is to organize ,present and communicate my work with clarity
+		  which ,i belive, would motivate me to strive harder in achieving Elegance,Simplicity and Sense in my work '
 url:              http://poochi.github.com
 baseurl:          '/'
 paginate:         5
@@ -18,7 +19,7 @@ author:
   url:            https://twitter.com/mdo
 
 # Custom vars
-version:          1.0.0
+version:          1.0.1
 
 github:
   repo:           https://github.com/poochi
