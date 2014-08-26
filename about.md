@@ -2,29 +2,31 @@
 layout: page
 title: About
 ---
+Hey there ! My name is Gowtham Rangarajan R. 
+I hack into kernel and low-level systems at times compilers too, during my dayjob here .Perhaps ,the best startup in providing multimedia
+solutions .I love to meddle with storage allocators,executibles and  machine learning [Whoa!] .I explore my creative side by writing apps for the web , mobile and at times Desktops . I love reading reasearch articles and  explaining it to fellow engineers . I love to learn by doing and certainly not afraid to jump programming tracks !
+
 
 <p class="message">
-  Hey there! This page is included as an example. Feel free to customize it for your own use upon downloading. Carry on!
+  You can always find me working on something or the other be it developing a game or an app or working on a  .I love elegant and terse solutions . I do strive a lot to imbibe my philosophy (on simplicity and elegance) in my work
 </p>
 
-In the novel, *The Strange Case of Dr. Jeykll and Mr. Hyde*, Mr. Poole is Dr. Jekyll's virtuous and loyal butler. Similarly, Poole is an upstanding and effective butler that helps you build Jekyll themes. It's made by [@mdo](https://twitter.com/mdo).
+I indulge quiet a bit too much in playing football, cycling and sleeping. 
+Its easy to be friends with me , *say that you are a **GAME OF THRONES** fan*
 
-There are currently two themes built on Poole:
+## Narcissim
 
-* [Hyde](http://hyde.getpoole.com)
-* [Lanyon](http://lanyon.getpoole.com)
+<p class="message">
+  Forgive me for being narcissitic, well ,read ahead only if you are curious enough ! 
+</p>
 
-Learn more and contribute on [GitHub](https://github.com/poole).
+I was strongly inclined towards math and phyics during my high school and during most of my college days .
+Me and my friend \[pradhyumna\] designed a graphical approach to count the number of solutions to inverse diophantine equations .
+* Im known as *poochi* when im online 
+* I did my undergrad at NIT Trichy .
+* Im addicted to simplicity and elegance ..... in Math ,Physics ,Programming and perhaps in life
+* Im baffled by our Economic structure ., and always wondered why wouldnt it collapse ? 
 
-## Setup
-
-Some fun facts about the setup of this project include:
-
-* Built for [Jekyll](http://jekyllrb.com)
-* Developed on GitHub and hosted for free on [GitHub Pages](https://pages.github.com)
-* Coded with [Sublime Text 2](http://sublimetext.com), an amazing code editor
-* Designed and developed while listening to music like [Blood Bros Trilogy](https://soundcloud.com/maddecent/sets/blood-bros-series)
-
-Have questions or suggestions? Feel free to [open an issue on GitHub](https://github.com/poole/issues/new) or [ask me on Twitter](https://twitter.com/mdo).
 
 Thanks for reading!
+
