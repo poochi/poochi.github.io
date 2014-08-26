@@ -4,7 +4,7 @@ title: About
 ---
 
 Hey there ! My name is *Gowtham Rangarajan Raman*. Im affectionately called as *rang*.<br>
-I hack into linux kernel, android OS and recently ARM compilers during my dayjob <a href="http://www.ittiam.com">here</a> .
+I hack into linux kernel, android OS and recently ARM compilers during my dayjob <a href="http://ittiam.com/en/Index.aspx">here</a> .
 Im simply in love with Python and <a href="http://poochi-recommend.appspot.com/testweb">machine-learning</a> .
 I explore my creative side by writing apps for the web , mobile and at times Desktops . I love reading reasearch publications,implementing it, and explaining it to fellow engineers . I love to learn by doing and certainly not afraid to jump tracks !
 
