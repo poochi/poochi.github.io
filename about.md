@@ -3,8 +3,26 @@ layout: page
 title: About
 ---
 
-Hey there ! My name is *Gowtham Rangarajan Raman*. Im also called as *rang* .<br>
+Hey there ! My name is *Gowtham Rangarajan Raman*. Im also called as *rang* among friends and *poochi* when im online .<br>
 I hack into linux kernel, android OS and ARM compilers apart from writing test suites ,refactoring utilities for audio components during my dayjob <a href="http://ittiam.com/en/Index.aspx">here</a> .I can turn nocturnal , at times, to satiate my passion for building software .Im simply in love with Python and <a href="http://poochi-recommend.appspot.com/testweb">machine-learning</a> .I try explore my creative side by writing apps for the web , mobile and at times Desktops . I enjoy reading research publications,implementing them, and explaining it to other folks . I learn by doing and am certainly not afraid to jump tracks ! 
+
+## Orignal Work
+Detecting malign cancerous tissues in breasts using Qlearning
+>	Abstract goes here
+	
+Detecting Texts in Digitized Images using Support Vector Machines
+>	Abstract goes here
+
+This is a one page report of my thesis
+
+
+Please check my projects page for the programming projects that i've involved myself in.
+
+## Technical Talks
+	Celt Encoder
+>	Summarizing how celt encoder works with bottle necks , shortcomings and few solutions
+
+*Delivered at Ittiam Systems*
 
 
 >	In search of a perfect problem that fuses machine-learning , creativity , kernel and compilers .
@@ -15,7 +33,7 @@ You can always find me working on something , be it developing a game, or a mobi
 
 >	I love elegant and terse solutions, generally algorithmic in nature. I strive a lot to imbibe my philosophy (on simplicity and elegance) in my work.
 
-
+## Publications
 
 I indulge in playing *football* , cycling and ocassionally reading *tamil* and *sanskrit* poetry . 
 Its easy to be friends with me : *say that you are a* <a href="http://www.hbo.com/game-of-thrones"> *GAME OF THRONES* </a>fan
