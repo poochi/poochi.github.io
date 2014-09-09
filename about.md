@@ -7,13 +7,24 @@ Hey there ! My name is *Gowtham Rangarajan Raman*. Im also called as *rang* amon
 I hack into linux kernel, android OS and ARM compilers apart from writing test suites ,refactoring utilities for audio components during my dayjob <a href="http://ittiam.com/en/Index.aspx">here</a> .I can turn nocturnal , at times, to satiate my passion for building software .Im simply in love with Python and <a href="http://poochi-recommend.appspot.com/testweb">machine-learning</a> .I try explore my creative side by writing apps for the web , mobile and at times Desktops . I enjoy reading research publications,implementing them, and explaining it to other folks . I learn by doing and am certainly not afraid to jump tracks ! 
 
 ## Orignal Work
-Detecting malign cancerous tissues in breasts using Qlearning
->	Abstract goes here
-	
+In chronological order
+
 Detecting Texts in Digitized Images using Support Vector Machines
 >	Abstract goes here
 
-This is a one page report of my thesis
+This is a one page report of my Bachelor project[Feb 2012]
+
+Object tracking using Velocity clustering techniques
+>	Abstract goes here
+
+This is an unpublished Techical report of my internship at IISc Bangalore [June 2011]
+
+
+Detecting malign cancerous tissues in breasts using Qlearning
+-*Ashwin,MalmathanRaj,Srivas,Gowtham Rangarajan*
+>	Abstract goes here
+
+This is our work *Published* in International Conference on Bio-Medical Assited Technologies [April-Dec 2010]
 
 
 Please check my projects page for the programming projects that i've involved myself in.
