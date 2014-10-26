@@ -1,7 +1,3 @@
----
-layout: page
-title: Work
----
 
 This is a brief representation of my work
 Im interested in compilers and systems. Im also making up my mind to involve myself in pyston or cpython communities.
