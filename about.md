@@ -3,8 +3,8 @@ layout: page
 title: About
 ---
 
-Hey there ! My name is *Gowtham Rangarajan Raman*. Im also called as *rang* among friends and *poochi* when im online. <br>
-I hack into linux kernel, android OS and ARM compilers apart from writing test suites, refactoring utilities for audio components during my dayjob <a href="http://ittiam.com/en/Index.aspx">here</a>. I can turn nocturnal,  at times, to satiate my passion for building software. I explore my creative side by writing apps for the web, mobile and at times Desktops. I enjoy reading research publications,implementing them, and explaining it to other folks. I learn by doing and am certainly not afraid to jump tracks ! 
+Hey there ! My name is *Gowtham Rangarajan Raman*. I'm also called as *rang* among friends and *poochi* when im online. <br>
+I hack into linux kernel, android OS and ARM compilers apart from writing test suites, refactoring utilities for audio components during my dayjob <a href="http://ittiam.com/en/Index.aspx">here</a>. I can turn nocturnal, at times, to satiate my passion for building software. I explore my creative side by writing apps for the web, mobile and at times Desktops. I enjoy reading research publications,implementing them and explaining it to other folks. I learn by doing and am certainly not afraid to jump tracks! 
 
 You can always find me working on something,  be it developing a game, or a mobile app, or hacking execs or discussing math/programming problem with folks. I guess its part of the 'exploring' phase for a newbie. 
 
@@ -31,19 +31,18 @@ I had presented a talk at Physics Society of Madras on *"Intuitive understanding
 </p>
 
 
-* Im known as *poochi* whenever im online, wherever im online
-* I did my undergrad in Electronics and Communication Engineering at <a href="http://www.nitt.edu">NIT Trichy </a>
-* Im addicted to simplicity and elegance in Math, Programming and perhaps in life
-* Im baffled by our Economic structure always wondering What prevents it from collapsing ? 
+* I'm known as *poochi* whenever im online, wherever im online
+* I finished my undergrad in Electronics and Communication Engineering at <a href="http://www.nitt.edu">NIT Trichy </a>
+* I'm addicted to simplicity and elegance in Math, Programming and perhaps in life
+* I'm baffled by our Economic structure always wondering What prevents it from collapsing ? 
 * An admirer of <a href="http://en.wikipedia.org/wiki/Raghuram_Rajan">*Raghuram Rajan* </a> and, my bestfriend,*Chitra*
 * I like reading, philosophical,short stories by *Guy-De-Maupassant* (*The Necklace* is my favourite)
-* I played cricket for my district as an off-break spin bowler and Right-hand batsman
+* I played cricket for my district as an off-break spin bowler and right-hand batsman
 
 <p class="message">
-"when you are there to
+"When You are there to
 save me why indeed should I seek others? And should you
 decide not to save me, who else will dare intercede?" 
 		- Kaamsikasthakam (Sanskrit verses, as conversing with god, translated)
 </p>
 Thanks for reading!
-

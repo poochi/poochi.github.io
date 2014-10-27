@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title> Kargers minimum cut for dummies- Gowtham rangarajan</title>
+  
+  
+  <script src="d3js.min.js"></script>
+  
+  
+   <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+  
+  <style type='text/css'>
+        .node {	
+        
+        stroke-width: 2px;
+    }
+
+    .link {
+        stroke-opacity: .3;
+    }
+	
+#container 
+{
+border-style:solid;
+border-width:medium;
+}
+
+#top 
+{
+float:left;
+border-style:ridge;
+border-width:medium;
+}
+#side 
+{
+float:right;
+border-style:ridge;
+border-width:medium;
+}
+#middle
+{
+margin-left:100px;
+margin-left:100px;
+
+}
+  </style>
+  
+
+
+<script type='text/javascript'>//<![CDATA[ 
+window.onload=function(){
+console.clear()
+var width = 400,
+    height = 500;
+	
+var w = width/3,h =height/3;
+
+var colorStep =93;
+var svg = d3.select("#middle")
+		.append("svg")
+		.attr("width",width)
+		.attr("height",height);
+		
+var svg1 = d3.select("#top")
+		.append("svg")
+		.attr("width",w)
+		.attr("height",h);
+
+var svg2 = d3.select("#side")
+		.append("svg")
+		.attr("width",w)
+		.attr("height",h);
+		
+	
+svg.append("g").attr("class", "links");
+svg.append("g").attr("class", "nodes");
+
+svg1.append("g").attr("class", "links");
+svg1.append("g").attr("class", "nodes");
+
+svg2.append("g").attr("class", "links");
+svg2.append("g").attr("class", "nodes");
+
+		
+
+var parentnode = [];
+var higlightedges=[];
+
+var problemnodes = [],deepcopynodes=[];
+var problemlinks = [],deepcopylinks=[];
+
+var nodecnt = 8;
+var edgecnt= 10;
+var mini = edgecnt+1;
+
+
+var mark=[];
+function generategraph() {
+			 
+	for(i=0;i<nodecnt;i++) {
+		var x = width/2- Math.random()*width/2;
+		var y =height/2- Math.random()*height/2;
+		problemnodes.push({id:i,x:x,y:y,r:5,color:"hsl("+(colorStep*i)%360+", 83%, 60%)"});
+		deepcopynodes.push({id:i,x:x,y:y,r:5,color:"hsl("+(colorStep*i)%360+", 83%, 60%)"});
+		mark.push(0);
+	}
+function isdoubleedge(a,b) {
+	if(a%nodecnt == b%nodecnt)
+		return true;
+	for(i=0;i<problemlinks.length;i++) {
+		if (a == problemlinks[i].srcind || a == problemlinks[i].dstind )
+				if (b == problemlinks[i].srcind || b == problemlinks[i].dstind )
+					return true;			
+	}
+	return false;
+}
+	
+	for(i=0;i<edgecnt;i++) {
+		var a =i%nodecnt;
+		var b =Math.floor((Math.random())*nodecnt);
+	
+//No double edges
+	while(isdoubleedge(a,b)){
+		b =Math.floor((Math.random())*nodecnt);
+	}
+		problemlinks.push({id:i,source :problemnodes[a%nodecnt] ,target:problemnodes[b%nodecnt],color:"#ccc",srcind:a,dstind:b});
+		deepcopylinks.push({id:i,source :deepcopynodes[a%nodecnt] ,target:deepcopynodes[b%nodecnt],color:"#ccc",srcind:a,dstind:b});
+		mark[a%nodecnt] = mark[b%nodecnt] = 1;
+	}
+
+	console.log('-------------------');
+	for(i=0;i<deepcopylinks.length;i++) {
+	console.log('deepcopylinks ----'+deepcopylinks[i].srcind+', '+deepcopylinks[i].dstind);
+	}
+	console.log('-------------------');
+}
+
+
+
+
+	
+function runkarger(nodes,links) {
+var d;
+
+
+
+var force = d3.layout.force()
+					 .nodes(nodes)
+					 .links(links)
+					 .size([width, height])
+					 .linkDistance(width/2)
+					 .on("tick", tick);
+					 
+
+
+var node = svg.select(".nodes").selectAll(".node"),
+	link = svg.select(".links").selectAll(".link");
+	
+function restart(v){
+console.log("Starting animation");
+link = link.data(links,function(d) {return d.id});
+link.enter().append("line")
+	.attr("stroke-width", 2)
+	.call(force.drag);
+link.exit().remove();
+node = node.data(nodes, function(d) { return d.id; });
+	node.enter()
+		.append("circle")
+		.attr("class", "node")
+		.call(force.drag);
+		
+node.exit().remove();
+if(v==0)
+force.start();
+else
+force.start(0.001);
+
+}
+
+
+function update(){
+	var HighlightTime = 1000;
+	var chkdone = true;
+	display(); 
+	console.log("node length "+nodes.length);
+	
+if(nodes.length == 2){
+	links.length = 0;
+	nodes.length = 0;
+	restart();
+	setTimeout(function(){force.stop();console.log("Last");display();reinit();},1000);
+	return;
+
+}else {
+function endall1(transition, callback) { 
+    var n = 0; 
+    transition 
+        .each(function() { console.log("pipp"); ++n; }) 
+        .each("end", function() { if (!--n) {console.log("calling edgetransition"+rndedge);
+	edgetransition(rndedge,HighlightTime);  }
+		}); 
+  };
+  
+	var rndedge = Math.floor((Math.random()*links.length))%links.length;
+	
+		links[rndedge].color = "green";
+		link.transition().duration(HighlightTime).attr("stroke",function(d){
+			if(d.id == links[rndedge].id){
+				return "green";
+			}
+			else
+				return d.color;
+		
+		}).call(endall1, function() { 
+		 });
+			
+			
+			  
+		
+	}		
+}
+		
+	
+function edgetransition(rndedge,HighlightTime){
+	
+		
+			
+			if(links.length>1){
+						
+			var contractTime = 1000;
+			var srcid = links[rndedge].source.id ;
+			var targid = links[rndedge].target.id ;
+			var posdiffX =links[rndedge].source.x + links[rndedge].target.x;
+			var posdiffY =links[rndedge].source.y + links[rndedge].target.y;
+			var index = rndedge;
+			
+			
+			
+			
+			// stop the force
+			force.stop();
+			
+			//start animation
+			
+			 node.data(nodes, function(d){return d.id;})
+            .transition().duration(contractTime)
+            .attr("cx", function(d){if(d.id != srcid && d.id != targid) return d.x; else return (links[index].target.x);})
+            .attr("cy", function(d){if(d.id != srcid && d.id != targid) return d.y; 
+			else  return (links[index].target.y);})
+            .attr("r", function(d){if(d.id != targid ) return d.r; else return 2.1*d.r;})
+			.attr("fill", function(d){if(d.id != srcid && d.id != targid) return d.color; else return "blue";})
+			.attr("transform",function(d) {
+			return "translate(0,0)";
+			})
+			
+			
+			link.transition().duration(contractTime)
+			.attr("x1",
+			function(d){
+			if(d.source.id == srcid )
+					return links[index].target.x;
+			return d.source.x;
+			})
+			.attr("x2",
+			function(d){
+			if(d.target.id == srcid )
+					return links[index].target.x;
+			return d.target.x;
+			})
+			.attr("y1",
+			function(d){
+			if(d.source.id == srcid )
+					return links[index].target.y;
+			return d.source.y;
+			})
+			.attr("y2",
+			function(d){
+			if(d.target.id == srcid )
+					return links[index].target.y;
+			return d.target.y;
+			}).call(endall, function() { 
+ });
+			
+			
+			  function endall(transition, callback) { 
+    var n = 0; 
+    transition 
+        .each(function() { console.log("pipp"); ++n; }) 
+        .each("end", function() { if (!--n) {console.log("calling removelink"+index); removelink(index) ;}
+		}); 
+  } 
+		
+			setTimeout(function(){
+			update();},1000+contractTime+HighlightTime);//Total time for the entire thing
+		}
+		
+}
+function removelink(edgeno){
+console.log("Removing edge");
+/*
+for(i=0;i<links.length;i++){
+	console.log(links[i].source.id+" "+links[i].target.id);
+}*/
+var index = 0;
+var targid  = links[edgeno].source.id;
+var  srcid = links[edgeno].target.id;
+
+for(i=0;i<nodes.length;i++){
+				if(nodes[i].id == srcid ) {
+					index = i;
+					break;
+				}			
+				
+	}
+	var srcx = nodes[index].x,	srcy = nodes[index].y, r =nodes[index].r;
+	
+	var ind = index;
+			nodes.splice(index,1);
+			
+			for(i=0;i<nodes.length;i++)	
+				if(targid == nodes[i].id){
+				console.log("found");
+					index =i;
+					break;
+				}
+				
+			parentnode[ind] = index; 
+				
+			 if(nodes[index].r>r)
+						nodes[index].r +=3;
+				else
+					nodes[index].r= r+3;
+			nodes[index].x = srcx;
+			nodes[index].y = srcy;
+			
+			
+		
+		
+for(i=0;i<links.length;i++){
+				if(links[i].source.id == srcid ) links[i].source = nodes[index];
+				if(links[i].target.id == srcid ) links[i].target = nodes[index];
+
+			}
+	
+links.splice(edgeno,1);
+
+
+/*removing double edges  and self loops n*n :( */
+var x =links.length;
+var dedges =[];
+dedges.length=0;
+for(i=0;i<x;i++){
+	
+	var s = links[i].source.id, d = links[i].target.id;
+	var v = 0;
+	if(s==d)
+		continue;
+	
+	for(j=0;j<dedges.length;j++){
+		//console.log(dedges.length+" "+j);
+		if(dedges[j].source.id==s && dedges[j].target.id == d) {
+			v=1;
+			break;
+		}
+		
+		
+	}
+	if(v==0)
+		dedges.push(links[i]);
+		
+}
+links.length = 0;
+for(i=0;i<dedges.length;i++)
+	links.push(dedges[i]);
+
+/*Done removing*/
+console.log("DOne removing");
+
+
+restart(0.01);
+
+}
+
+function tick() {
+	link.attr("x1", function(d) {return d.source.x;})
+		.attr("y1", function(d) {return d.source.y;})
+		.attr("x2", function(d) {return d.target.x;})
+		.attr("y2", function(d) {return d.target.y;})
+		.attr("stroke",function(d) {;return d.color;});
+	
+	node.attr("cx", function(d) { return d.x; })
+        .attr("cy", function(d) { return d.y; })
+		.attr("r",function(d){ return d.r;})
+		.attr("fill", function(d) {
+	    	return d.color;
+		}); 
+}
+
+
+restart(0);
+
+update();
+
+}
+
+
+var cnt =0;
+
+function reinit(){
+cnt++;
+if(cnt>9)
+	return;
+
+console.log("Running karger again "+" "+problemlinks.length+" "+problemlinks[3].source.id+ " "+problemlinks[0].source.x);
+var temp1=[],temp2=[];
+
+
+	for(i=0;i<deepcopynodes.length;i++) {
+	
+		var id = deepcopynodes[i].id;
+		var x = deepcopynodes[i].x;
+		var y = deepcopynodes[i].y;
+		var r = deepcopynodes[i].r;
+		var color = deepcopynodes[i].color;
+		temp1.push({id:id,x:x,y:y,r:5,color:"hsl("+(colorStep*i)%360+", 83%, 60%)"});
+	
+	}
+		
+	for(i=0;i<deepcopylinks.length;i++) {
+		var id =deepcopylinks[i].id;
+		var color =deepcopylinks[i].color;
+		var srcind =deepcopylinks[i].srcind;
+		var dstind = deepcopylinks[i].dstind;
+		
+		
+		temp2.push({id:id,source :temp1[srcind%nodecnt] ,target:temp1[dstind%nodecnt],color:color});
+	}
+	console.log("Links length "+temp2.length);
+	console.log("nodes length "+temp1.length);
+	display();
+	//memorise();
+	
+runkarger(temp1,temp2);
+
+
+}
+
+generategraph();
+copygraph();
+initminimumcutgraph();
+reinit();
+
+
+function initminimumcutgraph(){
+var force1= d3.layout.force()
+					 .nodes(problemnodes)
+					 .links(problemlinks)
+					 .size([w,h])
+					 .on("tick", tick);
+					 
+
+
+var node1 = svg2.select(".nodes").selectAll(".node"),
+	link1 = svg2.select(".links").selectAll(".link");
+	
+link1 = link1.data(problemlinks,function(d) {return d.id});
+link1.enter().append("line")
+	.attr("stroke-width", 2)
+	.call(force1.drag);
+link1.exit().remove();
+node1 = node1.data(problemnodes, function(d) { return d.id; });
+	node1.enter()
+		.append("circle")
+		.attr("class", "node")
+		.call(force1.drag);
+		
+node1.exit().remove();
+force1.start();
+
+function tick() {
+	link1.attr("x1", function(d) {return d.source.x;})
+		.attr("y1", function(d) {return d.source.y;})
+		.attr("x2", function(d) {return d.target.x;})
+		.attr("y2", function(d) {return d.target.y;})
+		.attr("stroke",function(d) {for(i=0;i<higlightedges.length;i++) {
+					if(higlightedges[i].id == d.id)
+						return "blue";
+					}
+					return d.color;}
+					);
+	
+	node1.attr("cx", function(d) { return d.x; })
+        .attr("cy", function(d) { return d.y; })
+		.attr("r",function(d){ return d.r;})
+		.attr("fill", function(d) {
+	    	return d.color;
+		}); 
+}
+
+}
+
+function copygraph(){
+
+var force1= d3.layout.force()
+					 .nodes(problemnodes)
+					 .links(problemlinks)
+					 .size([w,h])
+					 .linkDistance(w)
+					 .on("tick", tick);
+					 
+
+
+var node1 = svg1.select(".nodes").selectAll(".node"),
+	link1 = svg1.select(".links").selectAll(".link");
+	
+link1 = link1.data(problemlinks,function(d) {return d.id});
+link1.enter().append("line")
+	.attr("stroke-width", 2)
+	.call(force1.drag);
+link1.exit().remove();
+node1 = node1.data(problemnodes, function(d) { return d.id; });
+	node1.enter()
+		.append("circle")
+		.attr("class", "node")
+		.call(force1.drag);
+		
+node1.exit().remove();
+force1.start();
+
+function tick() {
+	link1.attr("x1", function(d) {return d.source.x;})
+		.attr("y1", function(d) {return d.source.y;})
+		.attr("x2", function(d) {return d.target.x;})
+		.attr("y2", function(d) {return d.target.y;})
+		.attr("stroke",function(d) {return d.color});
+	
+	node1.attr("cx", function(d) { return d.x; })
+        .attr("cy", function(d) { return d.y; })
+		.attr("r",function(d){ return d.r;})
+		.attr("fill", function(d) {
+	    	return d.color;
+		}); 
+}
+
+
+}
+
+function memorise(){
+	var i=0;
+
+	while(i!=parentnode[i]){
+		parentnode[i]= 0;
+		i=parentnode[i];
+	}
+	for(i=0;i<parentnode[i];i++)
+		if(parentnode[i]!=0)
+			parentnode[i] = 1;
+
+	var currentmini = 0;
+	
+	for(i=0;i<problemlinks.length;i++){
+		if(parentnode[problemlinks[i].source.id]!=parentnode[problemlinks[i].target.id]){
+			currentmini +=1;
+		}
+	}
+
+	if(currentmini<mini){
+		higlightedges.length = 0;
+		for(i=0;i<problemlinks.length;i++){
+			if(parentnode[problemlinks[i].source.id]!=parentnode[problemlinks[i].target.id]) {
+				higlightedges.pushback(problemlinks[i]);
+				
+			}
+
+		}
+	}
+		
+
+
+}
+
+
+function display(){
+
+console.log("popopo");
+for(i=0;i<deepcopylinks.length;i++){
+	var x =deepcopylinks[i].source.id;
+	x=1;
+	console.log(deepcopylinks[i].source.id);
+}
+}
+
+
+console.log("DONE");
+
+
+}//]]>  
+
+</script>
+
+
+</head>
+<body>
+  <head>
+ 
+<hgroup>
+<h1>Kargers Minimum Cut Algorithm for dummies</h1>
+</hgroup>
+</head>
+<body>
+<div id = "container">
+
+<div id = "top"></div>
+<div id = "side"></div>
+
+<div id = "middle">
+<p> Karger's minimum cut algorithm provides a simple and fantastic introduction to randomised algorithms!<br>
+It was my first encounter with a non trivial algorithm that devised a probabilistic solution !!! ie., it can guarentee that a significant repetitions of a certain method
+would be highly likely yield the answer we were looking for! Certainly a refreshing change of pace from strong binary proofs !!! smoooth, I liked it a lot :-) <br><br>
+Ok Lets dive in to the problem. Proceed only if you understand basic sorting algorithms and are willing to spend 15 minutes or so to understand this one.<br> </p>
+<p><h2>Problem Statement</h2> Given an undirected graph G, we can bifurcate the nodes into 2 groups A,B. Of all the bifurcations possible we have to find one bifurcation
+which has the least number of edges (cuts) from A to B.</p>
+<img src="kargercrop.png" alt="Bifurcation" style="width:250px;height:100px">
+<h2>Solution</h2>
+<p>Let the number of nodes be indicated by <b>nodecnt</b>  and the number of edges be <b>edgecnt</b>.
+<pre>
+----------------------------------------------
+begin loop1
+The Graph G that has to be bifurcated is initialised.
+begin loop2
+Pick a (uniformly) random edge in the graph
+merge (contract) its endpoints to a single 'super node' (ignore self loops)
+end loop2 (Repeat untill we have 2 nodes)
+Check the nodes that have contributed in creating the 'supernode' and calculate the number of edges (cut) between the supernodes.
+end loop1 (Repeat untill we for nodecnt^2 times atleast)
+-----------------------------------------------
+</pre>
+The algorithm's provides a proababilistic guarentee that you ll encounter a minimum cut/ minimum configuration if you perform loop2 sufficient number of times.
+</p>  
+<h2> Why does this work? <h2>
+<p> <h3>Interesting Thought</h3>
+In any graph, the cut of any bifurcation will be between 0 and <b>2*edgecnt/nodecnt</b> (Why? think in terms of one group having 1 node only)<br>
+which means the <b>2^(nodecnt-1)-1</b> configuration produces just few values !!!
+Redundancy hmm.....</p>
+<h3>Approach</h3> 
+This is what we do , we find the probability of our algorithm hitting a minimum cut configuration at the end of loop2 , then we repeat loop2 for sufficient number of times 
+to ensure we have an extremely trivial probability of NOT hitting the minimum !.<br>
+We are interested in finding <b>P(our algorithm hitting a minimal configuration at the end of LOOP2)</b><br>
+We should NOT select edges like e (see diagram) that are in the minimal cut during any step in our algorithm to end up with a minimal configuration. (convince yourself)<br>
+So, p(minimal configuration) = p(first edge being contracted not in minimal cut) *p(second edge being contracted not in minimal cut)* ...<br>
+<h3>Argument</h3>
+The graph given <b>G</b> has a minimal configuration.<br> 
+<b>Assumption</b>: The graph at this point can be contracted to lead to a minimal configuration. <br>
+<b>Fact</b>: This graph can have utmost <b>2*edgecnt/nodecnt</b> minimum cuts.<br>
+At this point the algorithm should NOT choose any one of these <b>2*edgecnt/nodecnt</b> among the <b>edgecnt</b> number of edges to end with the minimal configuration. probability of choosing such an edge is atleast 1 - 1/(<b>nodes/2</b>)<br>
+We choose such an edge, contract and endup with a graph having one lesser node.<br>
+Now the above assumption holds for the resulting graph too!. <br>
+Proceed with the Argument till we end up with 2 nodes (our algo terminates).
+</p>
+<p>Thus on applying the argument at every stage of the algorithm,<br>
+p(minimal configuration) = p(first edge being contracted not in minimal cut) *p(second edge being contracted not in minimal cut)* ...<br>
+ >= (1-2/n)*(1-2/(n-1))...(1-2/3)<br>
+ >= 2/(n*n)<br>
+ ie if we repeat the experiment for n*n times, we can be 'moderately' sure to hit the minimum configuration at some point during the repetition.
+ <p>
+ 
+<p> <h2>Improvements </h2>
+Towards the end of the algorithm we have high chances of choosing a wrong edge,
+so to improve the probability of hitting a minimum configuration, we can repeat the contraction for smaller graphs.
+In fact Karger and stein, later came up with an improvement which tells us when we should repeat the contraction (with ofc., the proof of guarentee that it hits the minimum earlier)
+They used master theorem to complete their proof</p>
+
+<h3>Take home ideas </h3>
+Since we uniformly (and randomly) choose an edge we end up contracting 'closely knit' nodes. We can, as a first tool, use it to <b>cluster</b> dense graphs like social networks.
+<br> Repeat your experiment  'wisely' to get better<b> tolerance </b>. [but dont over kill it] </p>
+
+<p> <b>Side Note.</b> Does the probability of hitting a minimal configuration allude 
+to the presence of n*n minimal configurations in a graph? (The algorithm proposed can hit generate all possible bifurcations)<br>
+Hope you liked it :)
+The demo below demonstrates the algorithm working down there. [I wrote it to play with d3js :-), its good you should try it too]
+Hit refresh to see it working ! :-)
+</p>
+
+</div>
+
+</div>
+ 
+<script src="http://d3js.org/d3.v3.min.js"></script>
+
+
+<footer>Implemented using D3 javascript library 2014 </footer>
+</body>	
+  
+</body>
+
+
+</html>
+
