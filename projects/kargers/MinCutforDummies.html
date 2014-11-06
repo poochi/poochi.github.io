@@ -46,6 +46,7 @@ margin-left:100px;
   
 
 
+
 <script type='text/javascript'>//<![CDATA[ 
 window.onload=function(){
 console.clear()
@@ -175,6 +176,7 @@ else
 force.start(0.001);
 
 }
+
 
 
 function update(){
@@ -619,7 +621,12 @@ would be highly likely yield the answer we were looking for! Certainly a refresh
 Ok Lets dive in to the problem. Proceed only if you understand basic sorting algorithms and are willing to spend 15 minutes or so to understand this one.<br> </p>
 <p><h2>Problem Statement</h2> Given an undirected graph G, we can bifurcate the nodes into 2 groups A,B. Of all the bifurcations possible we have to find one bifurcation
 which has the least number of edges (cuts) from A to B.</p>
-<img src="kargercrop.png" alt="Bifurcation" style="width:250px;height:100px">
+<img src="projects/karger/karger.png" alt="Bifurcation" style="width:250px;height:100px" >
+
+
+
+
+
 <h2>Solution</h2>
 <p>Let the number of nodes be indicated by <b>nodecnt</b>  and the number of edges be <b>edgecnt</b>.
 <pre>
@@ -631,7 +638,7 @@ Pick a (uniformly) random edge in the graph
 merge (contract) its endpoints to a single 'super node' (ignore self loops)
 end loop2 (Repeat untill we have 2 nodes)
 Check the nodes that have contributed in creating the 'supernode' and calculate the number of edges (cut) between the supernodes.
-end loop1 (Repeat untill we for nodecnt^2 times atleast)
+end loop1 (Repeat until we for nodecnt^2 times atleast)
 -----------------------------------------------
 </pre>
 The algorithm's provides a proababilistic guarentee that you ll encounter a minimum cut/ minimum configuration if you perform loop2 sufficient number of times.
