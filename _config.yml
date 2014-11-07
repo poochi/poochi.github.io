@@ -8,18 +8,17 @@ permalink:        pretty
 # Setup
 title:            Beginner's Luck
 tagline:          ''
-description:      ' The idea behind a website is to organize, present and communicate my work with clarity
-		  	which would motivate me to strive harder in achieving elegance, simplicity and sense in my work.'
+description:      ' The idea behind this website is to organize, present and communicate my work with clarity'
 url:              http://poochi.github.com
 baseurl:          '/'
 paginate:         5
 
 author:
   name:           'Gowtham Rangarajan'
-  url:            
+  url:            'http://poochi.github.io'
 
 # Custom vars
-version:          1.0.1
+version:          1.1.0
 
 github:
   repo:           https://github.com/poochi
